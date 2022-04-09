@@ -1,6 +1,6 @@
 import tkinter as tk
-import time
 
+#sudoku board
 sudBoard = [[0,2,0,0,0,4,3,0,0],
             [9,0,0,0,2,0,0,0,8],
             [0,0,0,6,0,9,0,5,0],
@@ -11,12 +11,15 @@ sudBoard = [[0,2,0,0,0,4,3,0,0],
             [1,0,0,0,9,0,0,0,3],
             [0,0,9,8,0,0,0,6,0]]
 
+#window setup
 window = tk.Tk()
 window.geometry("400x400")
 window.configure(bg='black')
 window.title("Sudoku Solver")
 window.resizable(width=False, height=False)
 
+
+#populates the sudoku grid with frames 
 def popBoard():
     for i in range(len(sudBoard)):
         for j in range(len(sudBoard[0])):
@@ -95,11 +98,13 @@ def valid(board, position, value):
 
 popBoard()
 
+#handles the button function. when the button is clicked, the board is solved and repopulated with the correct values
 def handleClick(event):
     solve(sudBoard)
     popBoard()
 
 
+#white box at bottom of window that the button sits on
 bottomDisplay = tk.Frame(
     master=window,
     width=400,
@@ -107,7 +112,7 @@ bottomDisplay = tk.Frame(
     bg='white'
 )
 
-
+#solve button
 solveButton = tk.Button(
     master=bottomDisplay,
     text="Solve",
@@ -115,18 +120,16 @@ solveButton = tk.Button(
     width=8
 )
 
+#create bottom frame and button
 bottomDisplay.pack_propagate(False)
 bottomDisplay.grid(row=10, column=0, columnspan=9, pady=(3, 0))
 solveButton.pack()
 
+#bind buttton to click event
 solveButton.bind("<Button-1>", handleClick)
 
-#window = tk.Tk()
-#window.geometry("395x400")
-#window.configure(bg='black')
-#window.resizable(width=False, height=False)
-
-#time.sleep(3)
-#solve(sudBoard)
-#popBoard()
+#test
+    #time.sleep(3)
+    #solve(sudBoard)
+    #popBoard()
 window.mainloop()
